@@ -4,9 +4,12 @@ export function getAppointmentsForDay(state, day) {
   //... returns an array of appointments for that day
   //using filter to filter arr not map that is returning the whole arr
   const aDay = state.days.filter(aday => aday.name === day)[0];
+  //or : const aDay = state.days.find(aday => aday.name === day);
 
   //console.log("aDay", aDay); //obj { id: 1, name: 'Monday', appointments: [ 1, 2, 3 ] }, ...
   
+  //loop throgh appointment Id : aDay.appointments.map(appointmentId => state.appointments[appointmentId])
+  //if (!aDay) return []
   const appointmentsObj = aDay ? aDay.appointments.map(appointmentId => state.appointments[appointmentId]) : [];
   
   return appointmentsObj;
