@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DayList from './DayList';
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
 import axios from 'axios';
 
 import "components/Application.scss";
@@ -88,9 +88,9 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    intervieweres: {}
+    interviewers: {}
   });
-  console.log("state.intervieweres", state.intervieweres);
+  console.log("state.interviewers", state.interviewers);
   const setDay = day => setState({ ...state, day });
   //const setDays = days => setState({ ...state, days }); updated to :
   //const setDays = days => setState(prev => ({ ...prev, days }));
@@ -107,7 +107,7 @@ export default function Application(props) {
       axios.get("/api/interviewers")
     ]
     ).then((all) => {
-      //console.log("all", all)
+      console.log("all", all)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     })
   }, [])
@@ -122,9 +122,23 @@ export default function Application(props) {
   //   );
   // });
 
+  function bookInterview (id, interview) {
+    console.log("id, interview: ", id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState(prev => ({...prev, appointments }));
+   
+  }
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
+    const interviewers = getInterviewersForDay(state, state.day);
     return (
       // <Appointment key={appointment.id} {...appointment} />
       <Appointment 
@@ -132,10 +146,13 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
 
+  
   
   return (
     <main className="layout">
@@ -161,7 +178,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {schedule}
-        <Appointment key="last" time="5pm" /> 
+        <Appointment key="last" time="5pm" bookInterview={bookInterview}/> 
         {/* If I dont't put it ^, it wont show my last appointment */}
       </section>
     </main>
