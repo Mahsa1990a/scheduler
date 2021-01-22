@@ -4,13 +4,10 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 import useVisualMode from "../../hooks/useVisualMode";
 
-
 import "components/Appointment/styles.scss";
-
-
-
 
 export default function Appointment (props) {
 
@@ -39,12 +36,14 @@ export default function Appointment (props) {
   }
 
   function deleteAppointment() {
+
     transition(DELETING);
 
     Promise.resolve(props.cancelInterview(props.id))
       .then(() => transition(EMPTY))
       .catch(err => { console.log(err) });
   }
+  
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -56,7 +55,7 @@ export default function Appointment (props) {
           interviewer={props.interview.interviewer.name}
           onEdit={() => transition("onEdit")}
           // onDelete={() => transition("onDelete")}
-          onDelete={deleteAppointment}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
@@ -74,6 +73,13 @@ export default function Appointment (props) {
       {mode === DELETING && (
         <Status 
           message="Deleting"
+        />
+      )}
+      {mode === CONFIRM && (
+        <Confirm 
+          onCancel={() => back("onCancel")}
+          onConfirm={deleteAppointment}
+          message="Are you sure you would like to delete?"
         />
       )}
     </article>
