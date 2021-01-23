@@ -148,7 +148,7 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState(prev => ({...prev, appointments }));
+    // setState(prev => ({...prev, appointments }));
     return axios.delete(`/api/appointments/${id}`);
 
   }
