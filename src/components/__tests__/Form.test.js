@@ -66,4 +66,26 @@ describe("Form", () => {
     //onSave is called with the correct arguments
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
+
+  //testing for changeName in Form.js
+  it("submits the name entered by the user", () => {
+    const onSave = jest.fn();
+
+    const { getByText, getByPlaceholderText } = render(
+      <Form 
+        interviewers={interviewers} 
+        onSave={onSave} 
+      />
+    );
+  
+    const input = getByPlaceholderText("Enter Student Name");
+  
+    //We use the fireEvent.change helper which is provided by the react-testing-library
+    //We can use this to trigger the onChange event for the input field
+    fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
+    fireEvent.click(getByText("Save"));
+  
+    expect(onSave).toHaveBeenCalledTimes(1);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+  });
 });
