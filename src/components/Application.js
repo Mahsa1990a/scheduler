@@ -56,7 +56,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointments}
-        <Appointment key="last" time="5pm" bookInterview={bookInterview}/> 
+        <Appointment key="last" time="5pm" /> 
         {/* If I dont't put it ^, it wont show my last appointment */}
       </section>
     </main>

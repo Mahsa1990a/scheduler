@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useApplicationData(props) {
+export default function useApplicationData(props) { //custom hook to manage API data
 
   // const [day, setDay] = useState("Monday");
   // const [days, setDays] = useState([]);
@@ -30,14 +30,27 @@ export default function useApplicationData(props) {
       axios.get("/api/interviewers")
     ]
     ).then((all) => {
-      console.log("all", all)
+      //console.log("all", all)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     })
   }, [])
 
+  function getUpdateSpots(newAppointments) {
+    return state.days.map((day, index) => {
+      let freeSpots = 0;
+
+      for (let key of state.days[index].appointments) {
+        if (!newAppointments[key].interview) {
+          freeSpots++;
+        }
+      }
+      const updatedSpots = {...day, spots: freeSpots}
+      return updatedSpots;
+    })
+  };
 
   function bookInterview (id, interview) {
-    console.log("id, interview: ", id, interview);
+    //console.log("id, interview: ", id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -46,11 +59,16 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState(prev => ({...prev, appointments }));
+    //setState(prev => ({...prev, appointments }));
 
-    return axios.put(`/api/appointments/${id}`, { interview });
-
-  }
+    return (
+      axios.put(`/api/appointments/${id}`, appointments[id])
+      .then(setState({
+        ...state, appointments, days: getUpdateSpots(appointments) 
+      }))
+      .catch(err => console.log(err))
+    );
+  };
 
   function cancelInterview(id) {
     const appointment = {
@@ -62,7 +80,13 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
     // setState(prev => ({...prev, appointments }));
-    return axios.delete(`/api/appointments/${id}`);
+    return (
+      axios.delete(`/api/appointments/${id}`, appointments[id])
+      .then(setState({
+        ...state, appointments, days: getUpdateSpots(appointments)
+      }))
+      .catch(err => console.log(err))
+    );
   
   }
 
