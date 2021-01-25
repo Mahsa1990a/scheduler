@@ -66,7 +66,7 @@ export default function useApplicationData(props) { //custom hook to manage API 
       .then(setState({
         ...state, appointments, days: getUpdateSpots(appointments) 
       }))
-      .catch(err => console.log(err))
+      // .catch(err => console.log(err))
     );
   };
 
@@ -82,10 +82,11 @@ export default function useApplicationData(props) { //custom hook to manage API 
     // setState(prev => ({...prev, appointments }));
     return (
       axios.delete(`/api/appointments/${id}`, appointments[id])
-      .then(setState({
+      .then(response => {
+        setState({
         ...state, appointments, days: getUpdateSpots(appointments)
-      }))
-      .catch(err => console.log(err))
+      })})
+      // .catch(err => console.log(err))
     );
   
   }
