@@ -11,7 +11,12 @@ it("renders without crashing", () => {
 });
 
 it("renders its `children` prop as text", () => {
+  //The render function is imported from the react-testing-library
+  //The getByText query function is returned by the render function but is a part of the the dom-testing-library
   const { getByText } = render(<Button>Default</Button>);
+  //The expect function is injected into the global scope by Jest
+  //The toBeInTheDocument function is a matcher provided through Jest by the jest-dom library
+  //The src/setupTests.js file configures Jest to use jest-dom
   expect(getByText("Default")).toBeInTheDocument();
 });
 
