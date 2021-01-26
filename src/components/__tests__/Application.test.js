@@ -1,7 +1,7 @@
 import React from "react";
 import Application from "components/Application";
 
-import { render, cleanup, waitForElement, getByText, getAllByTestId } from "@testing-library/react";
+import { render, cleanup, waitForElement, getByText, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react/dist";
 import { prettyDOM } from "@testing-library/react"; //it's a function
 
@@ -50,8 +50,17 @@ describe("Application", () => {
     //console.log("prettyDOM(appointments): ", prettyDOM(appointments)); //output is an arr of DOM nodes
   
     const appointment = getAllByTestId(container, "appointment")[0];
-    console.log("prettyDOM(appointment): ", prettyDOM(appointment)); //it is an empty appointment
+    //console.log("prettyDOM(appointment): ", prettyDOM(appointment)); //it is an empty appointment
   
+    fireEvent.click(getByAltText(appointment, "Add"));
+
+    fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
+      target: { value: "Lydia Miller-Jones" }
+    });
+
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
+    fireEvent.click(getByText(appointment, "Save"));
   });
 
 
