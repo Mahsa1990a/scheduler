@@ -53,6 +53,10 @@ describe("Application", () => {
     //const appointment = getAllByTestId(container, "appointment")[0];
     //console.log("prettyDOM(appointment): ", prettyDOM(appointment)); //it is an empty appointment
   
+    // use debug() to output the current state of the DOM
+    console.log("debug(appointment): ", debug(appointment));
+
+    
     fireEvent.click(getByAltText(appointment, "Add"));
 
     fireEvent.change(getByPlaceholderText(appointment, /Enter Student Name/i), {
@@ -62,9 +66,10 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
     fireEvent.click(getByText(appointment, "Save"));
+    //Use the expect function to verify that the the appointment element contains the text "Saving" immediately after the "Save" button is clicked
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
-    // use debug() to output the current state of the DOM
-    console.log("debug(appointment): ", debug(appointment));
+    
   });
 
 
