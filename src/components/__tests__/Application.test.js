@@ -1,7 +1,7 @@
 import React from "react";
 import Application from "components/Application";
 
-import { render, cleanup, waitForElement, getByText } from "@testing-library/react";
+import { render, cleanup, waitForElement, getByText, getAllByTestId } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react/dist";
 import { prettyDOM } from "@testing-library/react"; //it's a function
 
@@ -40,8 +40,14 @@ describe("Application", () => {
     const { container } = render(<Application />);
     
     await waitForElement(() => getByText(container, "Archie Cohen"));
+
     //we call console after data loads
-    console.log("prettyDOM(container)", prettyDOM(container));
+    //console.log("prettyDOM(container)", prettyDOM(container));
+
+    //using getAllByTestId to search for all of the appointments in the container
+    //we added data-testid=appointment to the <article> in index
+    const appointments = getAllByTestId(container, "appointment");
+    console.log("prettyDOM(appointments): ", prettyDOM(appointments)); //output is an arr of DOM nodes
   });
 
 
