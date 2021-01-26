@@ -47,7 +47,11 @@ describe("Application", () => {
     //using getAllByTestId to search for all of the appointments in the container
     //we added data-testid=appointment to the <article> in index
     const appointments = getAllByTestId(container, "appointment");
-    console.log("prettyDOM(appointments): ", prettyDOM(appointments)); //output is an arr of DOM nodes
+    //console.log("prettyDOM(appointments): ", prettyDOM(appointments)); //output is an arr of DOM nodes
+  
+    const appointment = getAllByTestId(container, "appointment")[0];
+    console.log("prettyDOM(appointment): ", prettyDOM(appointment)); //it is an empty appointment
+  
   });
 
 
