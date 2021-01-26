@@ -49,8 +49,9 @@ describe("Application", () => {
     const appointments = getAllByTestId(container, "appointment");
     //console.log("prettyDOM(appointments): ", prettyDOM(appointments)); //output is an arr of DOM nodes
   
+    // or : appointment = appointments[0]
     const appointment = getAllByTestId(container, "appointment")[0];
-    //console.log("prettyDOM(appointment): ", prettyDOM(appointment)); //it is an empty appointment
+    console.log("prettyDOM(appointment): ", prettyDOM(appointment)); //it is an empty appointment
   
     fireEvent.click(getByAltText(appointment, "Add"));
 
