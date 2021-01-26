@@ -71,7 +71,15 @@ describe("Application", () => {
     //wait for the element that contains the name "Lydia Miller-Jones" to appear
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
 
+    const day = getAllByTestId(container, "day").find(day => 
+      //use queryByText because we'll have null returned if it doesn't find the node
+      //if we use getBy test will throw an error and fail if it doesn't find the text "Monday" on the first iteration
+      getByText(day, "Monday")
+    );
+    console.log("prettyDOM(day): ", prettyDOM(day));
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
     
+
   });
 
 
