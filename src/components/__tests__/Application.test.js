@@ -3,7 +3,7 @@ import Application from "components/Application";
 
 import { render, cleanup, waitForElement, getByText } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react/dist";
-
+import { prettyDOM } from "@testing-library/react"; //it's a function
 
 afterEach(cleanup);
 
@@ -36,9 +36,12 @@ describe("Application", () => {
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
   });
 
-  it("loads data, books an interview and reduces the spots remaining for the first day by 1", () => {
+  it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
     const { container } = render(<Application />);
-    console.log("container: ", container)
+    
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    //we call console after data loads
+    console.log("prettyDOM(container)", prettyDOM(container));
   });
 
 
