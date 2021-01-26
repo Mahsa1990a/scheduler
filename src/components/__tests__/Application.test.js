@@ -1,7 +1,7 @@
 import React from "react";
 import Application from "components/Application";
 
-import { render, cleanup, waitForElement } from "@testing-library/react";
+import { render, cleanup, waitForElement, getByText } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react/dist";
 
 
@@ -35,4 +35,11 @@ describe("Application", () => {
   
     expect(getByText("Leopold Silvers")).toBeInTheDocument();
   });
+
+  it("loads data, books an interview and reduces the spots remaining for the first day by 1", () => {
+    const { container } = render(<Application />);
+    console.log("container: ", container)
+  });
+
+
 });
