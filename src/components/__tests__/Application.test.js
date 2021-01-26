@@ -68,6 +68,8 @@ describe("Application", () => {
     fireEvent.click(getByText(appointment, "Save"));
     //Use the expect function to verify that the the appointment element contains the text "Saving" immediately after the "Save" button is clicked
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
+    //wait for the element that contains the name "Lydia Miller-Jones" to appear
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
 
     
   });
