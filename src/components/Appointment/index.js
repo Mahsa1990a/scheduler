@@ -45,7 +45,7 @@ export default function Appointment (props) {
       });
   }
 
-  function deleteAppointment(event) {
+  function destroy(event) {
 
     transition(DELETING, true);
 
@@ -80,7 +80,7 @@ export default function Appointment (props) {
         <Form 
           interviewers = {props.interviewers}
           onSave={save}
-          onCancel={() => back("onCancel")}
+          onCancel={back}
         />
       )}
       {mode === SAVING && (
@@ -95,34 +95,32 @@ export default function Appointment (props) {
       )}
       {mode === CONFIRM && (
         <Confirm 
-          onCancel={() => back("onCancel")}
-          onConfirm={deleteAppointment}
+          onCancel={back}
+          onConfirm={destroy}
           message="Are you sure you would like to delete?"
         />
       )}
       {mode === EDIT && (
         <Form 
-          interviewers = {props.interviewers}
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
-          onCancel={() => back("onCancel")}
+          interviewers = {props.interviewers}
+          onCancel={back}
           onSave={save}
         />
       )}
       {mode === ERROR_SAVE && (
         <Error
-          onClose={() => back("onCancel")}
+          onClose={back}
           message="Could not save appointment"
         />
       )}
       {mode === ERROR_DELETE && (
         <Error
-          onClose={() => back("onCancel")}
+          onClose={back}
           message="Could not cancel appointment"
         />
       )}
-      
     </article>
-
-  )
+  );
 }
