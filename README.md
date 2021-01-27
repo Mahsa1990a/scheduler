@@ -10,22 +10,22 @@ The data is obtained from an API server using PSQL database.
 ### Homepage
 Monday selected, notice the edit and delete buttons in the appointment block appear only when hovered.
 
-!["Home page"]()
+!["Home page"](https://github.com/Mahsa1990a/scheduler/blob/master/docs/Home%20page.png?raw=true)
 
 ### Adding appointment
 Add/Edit an appointment.
 
-!["Adding appointment page"]()
+!["Adding appointment page"](https://github.com/Mahsa1990a/scheduler/blob/master/docs/Adding-appointment-page.png?raw=true)
 
 ### Deleting appointment
 Confirmation message when trying to delete an appointment.
 
-!["Deleting appointment page"]()
+!["Deleting appointment page"](https://github.com/Mahsa1990a/scheduler/blob/master/docs/Deleting-appointment-page.png?raw=true)
 
 ### Updated spots
 Updated page, notice the spots remaining changed.
 
-!["Updated spots page"]()
+!["Updated spots page"](https://github.com/Mahsa1990a/scheduler/blob/master/docs/Updated-spots-page.png?raw=true)
 
 
 ## Technology
