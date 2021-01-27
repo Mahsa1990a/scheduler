@@ -1,8 +1,15 @@
 describe("Appointments", () => {
 
+  //Common Behaviour
+  beforeEach(() => {
+    cy.request("GET", "/api/debug/reset");
+  
+    cy.visit("/");
+  
+    cy.contains("Monday");
+  });
+
   it("should book an interview", () => {
-    cy.visit("/")
-    cy.contains("Monday")
 
     //Clicks on the "Add" button in the second appointment
     // cy.get(':nth-child(2) > .appointment__add > .appointment__add-button').click(); OR :
@@ -18,6 +25,11 @@ describe("Appointments", () => {
 
     //Clicks the save button
     cy.contains("Save").click();
+
+    //Sees the booked appointment
+    cy.contains(".appointment__card--show", "Lydia Miller-Jones");
+    cy.contains(".appointment__card--show", "Sylvia Palmer");
+
   });
 
   
