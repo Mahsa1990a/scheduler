@@ -28,6 +28,7 @@ export default function Form (props) {
     reset();
    props.onCancel();
   }
+  // we don't need save func anymore because we have it inside validate()
   // const save = () => {
   //   props.onSave(name, interviewer);
   // }

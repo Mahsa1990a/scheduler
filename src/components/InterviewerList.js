@@ -29,10 +29,6 @@ export default function InterviewerList(props) {
       </ul>
     </section>
   );
-//   <section className="interviewers">
-//    <h4 className="interviewers__header text--light">Interviewer</h4>
-//    <ul className="interviewers__list"></ul>
-//   </section>
 }
 
 //We will make sure the interviewers prop is an Array and it is required.

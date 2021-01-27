@@ -30,7 +30,6 @@ describe("Appointments", () => {
     //Sees the booked appointment
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Sylvia Palmer");
-
   });
 
   it("should edit an interview", () => {
@@ -59,6 +58,4 @@ describe("Appointments", () => {
     cy.contains(".appointment__card--show", "Archie Cohen")
       .should("not.exist");
   });
-
-  
 });

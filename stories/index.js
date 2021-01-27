@@ -18,6 +18,8 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
+////////////////////////////////////////////////////////////
+// Button Test:
 
 storiesOf("Button", module)
   .addParameters({
@@ -37,6 +39,8 @@ storiesOf("Button", module)
     </Button>
   ));
 /////////////////////////////////////////////
+// DayListItem Test:
+
 storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -48,6 +52,8 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
 ));
 /////////////////////////////////////////////
+// DayList test:
+
 const days = [
   {
     id: 1,
@@ -77,6 +83,8 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
   ));
 /////////////////////////////////////////////
+// InterviewerListItem test:
+
   const interviewer = {
     id: 1,
     name: "Sylvia Palmer",
@@ -112,6 +120,8 @@ storiesOf("DayList", module)
       />
     ));
 /////////////////////////////////////////////
+// InterviewerList test:
+
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
@@ -138,6 +148,8 @@ storiesOf("InterviewerList", module)
     />
   ));
 /////////////////////////////////////////////
+// Appointment Test:
+
 storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
@@ -163,19 +175,19 @@ storiesOf("Appointment", module)
       <Appointment id="last" time="1pm" />
     </Fragment>
   ))
-  //Since the Header component is a child of our Appointment component, it's stories should be chained to the Appointment stories
+  // Header test:
   .add("Header", () =>
     <Header 
       time="12pm"
     />
   )
-
+  // Empty test:
   .add("Empty", () =>
     <Empty 
       onAdd={action("onAdd")}
     />
   )
-
+  // Show test:
   .add("Show", () =>
     <Show 
       student="Lydia Miller-Jones"
@@ -184,7 +196,7 @@ storiesOf("Appointment", module)
       onDelete={action("onDelete")}
     />
   )
-
+  // Confirm test:
   .add("Confirm", () =>
     <Confirm 
       message="Delete the appointment?"
@@ -192,20 +204,20 @@ storiesOf("Appointment", module)
       onCancel={action("onCancel")}
     />
   )
-
+  // Status test:
   .add("Status", () =>
     <Status 
       message="Deleting"
     />
   )
-
+  // Error test:
   .add("Error", () =>
     <Error 
       message="Could not delete appointment."
       onClose={action("onClose")}
     />
   )
-
+  // Create test:
   .add("Create", () =>
     <Form 
       interviewers={interviewers}
@@ -213,7 +225,7 @@ storiesOf("Appointment", module)
       onCancel={action("onCancel")}
     />
   )
-
+  // Edit test:
   .add("Edit", () =>
     <Form 
       name="Lydia Miller-Jones"

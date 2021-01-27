@@ -44,50 +44,6 @@ describe("Form", () => {
     //onSave is not called
     expect(onSave).not.toHaveBeenCalled();
   });
-  
-  // xit("calls onSave function when the name is defined", () => {
-  //   /* 1. Create the mock onSave function */
-  //   const onSave = jest.fn();
-  //   /* 2. Render the Form with interviewers, name and the onSave mock function passed as an onSave prop */
-  //   const { getByText, queryByText } = render(
-  //     <Form
-  //       interviewers={interviewers}
-  //       onSave={onSave}
-  //       name="Lydia Miller-Jones"
-  //     />
-  //   );
-  //   /* 3. Click the save button */
-  //   fireEvent.click(getByText("Save"));
-
-  //   //validation is not shown
-  //   expect(queryByText(/student name cannot be blank/i)).toBeNull();
-  //   //onSave is called once
-  //   expect(onSave).toHaveBeenCalledTimes(1);
-  //   //onSave is called with the correct arguments
-  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
-  // });
-
-  // //testing for changeName in Form.js
-  // it("submits the name entered by the user", () => {
-  //   const onSave = jest.fn();
-
-  //   const { getByText, getByPlaceholderText } = render(
-  //     <Form 
-  //       interviewers={interviewers} 
-  //       onSave={onSave} 
-  //     />
-  //   );
-  
-  //   const input = getByPlaceholderText("Enter Student Name");
-  
-  //   //We use the fireEvent.change helper which is provided by the react-testing-library
-  //   //We can use this to trigger the onChange event for the input field
-  //   fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
-  //   fireEvent.click(getByText("Save"));
-  
-  //   expect(onSave).toHaveBeenCalledTimes(1);
-  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
-  // });
 
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
